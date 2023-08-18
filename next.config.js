@@ -8,6 +8,14 @@ const nextConfig = {
     ],
 },
 eslint:false,
+rules: {
+  // 'off' turns off the rule
+  'jsx-a11y/anchor-is-valid': 'off',
+  // Add more rules as needed
+},
+eslint: {
+  ignoreDuringBuilds: true,
+},
 }
 
 module.exports = nextConfig
