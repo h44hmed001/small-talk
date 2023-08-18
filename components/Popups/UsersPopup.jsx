@@ -56,7 +56,7 @@ const UsersPopup = ({...props}) => {
   }
   return (
     <PopupWrapper {...props}>
-      <Search/>
+      <Search onHide={props.onHide} />
       <div className='flex overflow-auto scrollbar flex-col gap-4'>
       
         {users&&Object.values(users).map((user)=>user.uid===currentUser.uid?<div key={user.uid} onClick={()=>selectUser(user)} className='flex  cursor-pointer hover:bg-[#193f5b]/[0.4] rounded-xl p-3 items-center gap-4'>

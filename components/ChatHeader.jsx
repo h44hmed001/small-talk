@@ -7,15 +7,15 @@ import ChatMenu from './ChatMenu'
 
 const ChatHeader = () => {
     const {selectedChat,users,data}=useChat()
-    const online=selectedChat?.isOnline
+    const online=data?.user?.isOnline
     const [menu,setMenu]=useState(false)
 
   return (
     <div className="flex items-center  justify-between bg-[#0d2331] p-4">
       <div className='flex gap-3'>
-      <div><Avatar size="large" user={selectedChat}/></div>
+      <div><Avatar size="large" user={data.user}/></div>
       <div className='flex flex-col '>
-      <div>{selectedChat?.displayName}</div>
+      <div>{data?.user?.displayName}</div>
       <span className='text-sm'>{online?"Online":"Offline"} </span>
       </div>
       </div>

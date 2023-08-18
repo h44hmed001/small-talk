@@ -47,7 +47,7 @@ const Chats = () => {
       <ul className='mt-10 flex flex-col gap-8'>
         {filteredChats.map((chat)=>{
           const user=(users[chat[1].userInfo.uid])
-          console.log(chat)
+          
           return user.uid===currentUser.uid?(<li key={user.uid} onClick={()=>selectHandle(user)} className={`flex p-2 pr-10  cursor-pointer w-full relative ${user?.uid===selectedChat?.uid?"border-l border-l-white":""} items-center gap-4`}>
           <Avatar user={user} size="x-large" />
           <div className='flex w-[250px] justify-between items-center font-light'>

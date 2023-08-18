@@ -12,8 +12,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { profileColors } from "@/utils/constants";
+import { useChat } from "@/context/chatContext";
 
-const login = () => {
+const page = () => {
+  const {dispatch}=useChat()
   const [err, setErr] = useState(false);
   const [loginError, setLoginError] = useState(false);
   const { currentUser, loading } = useAuth();
@@ -66,6 +68,9 @@ const login = () => {
       navigate.push("/");
     }
   }, [currentUser, loading]);
+  useEffect(()=>{
+    dispatch({ type: "EMPTY" });
+},[])
   return (
     <div className="main h-[100vh] bg-black flex items-center flex-col justify-center">
       <div className="flex flex-col items-center">
@@ -126,4 +131,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default page;

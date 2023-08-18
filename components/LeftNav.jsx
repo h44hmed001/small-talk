@@ -14,12 +14,17 @@ import { doc, updateDoc } from 'firebase/firestore'
 import { auth, db } from '@/firebase/firebase'
 import { updateProfile } from 'firebase/auth'
 import UsersPopup from './Popups/UsersPopup'
+import { useChat } from '@/context/chatContext'
 const LeftNav = () => {
     const {currentUser,signOut,setCurrentUser}=useAuth()
+    const {dispatch}=useChat()
     const [popUp,setPopUp]=useState(false)
     const [editProfile,setEditProfile]=useState(false)
     const userToUpdate=auth.currentUser
+    const handleLogOut=()=>{
+      signOut()
 
+    }
     const uploadImage=(file)=>{
       if(file){
         const uploadTask = uploadBytesResumable(ref(storage, currentUser.displayName), file);
@@ -75,7 +80,7 @@ uploadTask.on('state_changed',
           photoURL: null
         })
       }
-      console.log(obj)
+    
     }
     const editProfileContainer=()=>{
       return(
@@ -120,7 +125,7 @@ uploadTask.on('state_changed',
       </div>:editProfileContainer()}
       <div className={`flex ${editProfile?"ml-5":"flex-col items-center"} gap-5`}>
         <div><Icon onClick={()=>setPopUp(!popUp)} className="bg-sky-400 hover:bg-sky-900" icon={<FiPlus size={24}/>} size={"large"} /></div>
-        <div onClick={signOut}><Icon className=" hover:bg-black/[0.5]" icon={<IoLogOutOutline size={24}/>} size={"large"} /></div>
+        <div onClick={handleLogOut}><Icon className=" hover:bg-black/[0.5]" icon={<IoLogOutOutline size={24}/>} size={"large"} /></div>
        
       </div>
       {popUp&&<UsersPopup title="Find Users" onHide={()=>setPopUp(false)}  />}

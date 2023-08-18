@@ -17,6 +17,7 @@ const ChatFooter = () => {
   let timeout=null
   const {inputText,setInputText,isTyping,setAttachment,setAttachmentPreview,attachmentPreview,attachment,data}=useChat()
   const {currentUser}=useAuth()
+
     const onEmojiClick=(emojiData)=>{
       setInputText(inputText+emojiData.emoji)
     }
@@ -124,6 +125,9 @@ const ChatFooter = () => {
         }
           ,20);
       }
+      useEffect(()=>{
+        setInputText("")
+      },[data.chatId])
 
 
   return (

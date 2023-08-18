@@ -3,11 +3,13 @@ import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updat
 import { db } from "@/firebase/firebase";
 import Avatar from "./Avatar";
 import { useAuth } from "@/context/authContext";
+import { useChat } from "@/context/chatContext";
 
-const Search = () => {
+const Search = ({onHide}) => {
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
   const [userName, setUserName] = useState("");
+  const {dispatch}=useChat()
   const {currentUser}=useAuth()
   const selectUser=async()=>{
     const combinedId=user.uid>currentUser.uid?user.uid+currentUser.uid:currentUser.uid+user.uid
@@ -44,6 +46,8 @@ const Search = () => {
       })
     }
     else{
+      dispatch({ type: "CHANGE_USER", payload: user });
+      onHide()
     }
     setUser(null)
     setUserName("")

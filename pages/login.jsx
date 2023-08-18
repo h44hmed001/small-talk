@@ -7,9 +7,11 @@ import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
 import { GoogleAuthProvider } from "firebase/auth";
 import { FacebookAuthProvider } from "firebase/auth";
+import { useChat } from '@/context/chatContext'
 const login = () => {
     const [loginError,setLoginError]=useState(false)
     const {currentUser,loading}=useAuth()
+    const {dispatch}=useChat()
     const gProvider = new GoogleAuthProvider();
     const fProvider = new FacebookAuthProvider();
     const [err,setErr]=useState(false)
@@ -48,6 +50,9 @@ const login = () => {
         }
         
     },[currentUser,loading])
+    useEffect(()=>{
+        dispatch({ type: "EMPTY" });
+    },[])
   return (<div className='main h-[100vh] bg-black flex items-center flex-col justify-center'>
         <div className='flex flex-col items-center'>
         <div className='font-bold text-[30px]'>Login to your Account</div>
