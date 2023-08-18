@@ -28,6 +28,11 @@ const ChatMenu = ({setMenu}) => {
     await updateDoc(doc(db,"userChats",currentUser.uid),{
       [data.chatId+".chatDeleted"]:true
     })
+    await updateDoc(doc(db,"userChats",currentUser.uid),{
+      [data.chatId+".lastMessage.text"]:"",
+      [data.chatId+".lastMessage.img"]:false
+    })
+    
   }
   const isUserBlocked = users[currentUser.uid]?.blockedUsers?.find(
     (u) => u === data.user.uid

@@ -103,7 +103,7 @@ uploadTask.on('state_changed',
             </div>
             <div className='grid grid-cols-5 gap-5 mt-3'>
               {profileColors.map((color)=>(
-                <span onClick={()=>handleEdit("change-color",color)} style={{backgroundColor:color}} className="h-7 hover:scale-125 flex items-center justify-center rounded-full w-7">
+                <span key={color} onClick={()=>handleEdit("change-color",color)} style={{backgroundColor:color}} className="h-7 hover:scale-125 flex items-center justify-center rounded-full w-7">
                   {color===currentUser.color&&<BsCheck />}
                 </span>
               ))}
